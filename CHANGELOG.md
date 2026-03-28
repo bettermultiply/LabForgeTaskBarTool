@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.1.1] - 2026-03-29
+
+### Fixed
+
+- Prevented the menu bar popover from jumping or repositioning during manual refresh when the scrollable layout is open
+
 ## [0.1.0] - 2026-03-28
 
 ### Added

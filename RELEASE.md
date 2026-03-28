@@ -1,20 +1,13 @@
 # Release Notes
 
-## v0.1.0
+## v0.1.1
 
-First public release of `LabForgeTaskBarTool`.
+Patch release for `LabForgeTaskBarTool`.
 
-### Features
+### Fixed
 
-- Native macOS menu bar app for LabForge monitoring
-- Recent status timeline for supported models
-- Model remaining / budget section
-- Optional leaderboard section controlled from the right-click menu
-- Menu bar text visibility toggle
-- Launch at login support
-- Local `.app` and `.dmg` packaging scripts
+- Fixed the popover window jumping during refresh after the scrollable layout update
 
 ### Included Artifacts
 
-- `LabForgeMenuBar.app`
 - `LabForgeMenuBar.dmg`
