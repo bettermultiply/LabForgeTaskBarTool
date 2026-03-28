@@ -95,7 +95,7 @@ final class MenuBarController: NSObject, NSMenuDelegate {
         viewModel.$budgetStatus
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                self?.refreshPopoverContent()
+                self?.refreshMenuState()
             }
             .store(in: &cancellables)
 
@@ -110,7 +110,6 @@ final class MenuBarController: NSObject, NSMenuDelegate {
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 self?.refreshMenuState()
-                self?.refreshPopoverContent()
             }
             .store(in: &cancellables)
 
@@ -140,14 +139,6 @@ final class MenuBarController: NSObject, NSMenuDelegate {
         if let item = contextMenu.items.first(where: { $0.title == "Show Menu Bar Text" }) {
             item.state = viewModel.showMenuBarText ? .on : .off
         }
-    }
-
-    private func refreshPopoverContent() {
-        popover.contentSize = popoverSize
-        popover.contentViewController = NSHostingController(
-            rootView: MenuBarContentView(viewModel: viewModel)
-                .frame(width: popoverSize.width)
-        )
     }
 
     @objc
