@@ -29,6 +29,9 @@ The app reads public LabForge endpoints directly:
 - Xcode 26.4 or newer recommended
 - Swift 6.3 or newer recommended
 
+Linux / KDE Plasma support is available as a separate implementation under [`linux/`](/home/betmul/BETMUL/LabForgeTaskBarTool/linux).
+There is also a native Plasma widget package under [`plasma/org.kde.plasma.labforge/`](/home/betmul/BETMUL/LabForgeTaskBarTool/plasma/org.kde.plasma.labforge) for use through `Add or Manage Widgets`.
+
 ## Project Structure
 
 ```text
@@ -49,6 +52,18 @@ The app reads public LabForge endpoints directly:
 │   ├── generate_icon.swift
 │   ├── package_app.sh
 │   └── package_dmg.sh
+├── linux/
+│   ├── app.py
+│   ├── autostart.py
+│   ├── main.py
+│   ├── models.py
+│   ├── requirements.txt
+│   ├── service.py
+│   └── settings.py
+├── plasma/
+│   └── org.kde.plasma.labforge/
+│       ├── contents/
+│       └── metadata.json
 ├── CHANGELOG.md
 ├── Package.swift
 ├── README.md
@@ -63,6 +78,19 @@ Terminal build:
 
 ```bash
 swift build
+```
+
+Linux / KDE Plasma development:
+
+```bash
+python3 -m pip install -r linux/requirements.txt
+python3 linux/main.py
+```
+
+Plasma widget install:
+
+```bash
+./scripts/install_plasmoid.sh
 ```
 
 ## Packaging
@@ -97,6 +125,20 @@ Right click:
 - `Launch at Login`
 - `Quit`
 
+Linux / KDE Plasma:
+
+- Left click the tray icon to open or close the monitor window
+- Right click the tray icon to open the control menu
+- `Launch at Login` writes or removes `~/.config/autostart/labforge-menubar.desktop`
+- `Show Tray Text` controls whether the generated tray icon includes the current `up/total` summary
+
+Plasma widget:
+
+- Install with [`scripts/install_plasmoid.sh`](/home/betmul/BETMUL/LabForgeTaskBarTool/scripts/install_plasmoid.sh)
+- Open `Add or Manage Widgets`
+- Search for `LabForge Status`
+- Add it to the top panel for native Plasma popup behavior
+
 ## UI Overview
 
 - `Model Remaining`: budget and remaining capacity cards for GPT and Claude
@@ -108,6 +150,7 @@ Right click:
 - The app refreshes automatically every 60 seconds.
 - Leaderboard visibility is persisted with `UserDefaults`.
 - Menu bar text visibility is also persisted with `UserDefaults`.
+- The Linux implementation persists its toggles under `~/.config/LabForgeMenuBar/settings.json`.
 - Build outputs in `dist/` and transient build products are ignored by git.
 
 ## License
